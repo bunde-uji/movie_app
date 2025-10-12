@@ -1,26 +1,52 @@
-import { ScrollView, Text, View, Image } from "react-native";
-import "../global.css"
-import SearchBar from "@/components/SearchBar"
+import { ScrollView, Text, View, Image, ActivityIndicator, FlatList } from "react-native";
+import "../global.css";
+import SearchBar from "@/components/SearchBar";
 import { useRouter } from "expo-router";
+import useFetch from "@/services/useFetch";
+import { fetchMovies } from "@/services/api";
 
 export default function Index() {
   const router = useRouter();
 
+  const {
+    data: movies,
+    loading: moviesLoading,
+    error: moviesError,
+  } = useFetch(() => fetchMovies({ query: "" }));
+
   return (
     <View className="flex-1 justify-center items-center bg-primary w-full">
-      <ScrollView 
+      <ScrollView
         className="p-5 flex-1 w-full"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           alignItems: "center",
         }}
       >
-        <Image source={require("../../assets/images/icon.png")} className="h-14 w-14 mb-2" />
-        <SearchBar 
-          placeholder="Search for a movie"
-          onPress={() => router.push("/search")}
-          onChangeText={() => {}}
+        <Image
+          source={require("../../assets/images/icon.png")}
+          className="h-14 w-14 mb-2"
         />
+        <View className="w-full">
+          <SearchBar
+            placeholder="Search for a movie"
+            onPress={() => router.push("/search")}
+            onChangeText={() => {}}
+          />
+        </View>
+
+        {moviesLoading ? <ActivityIndicator /> : 
+          moviesError ? <Text>Error: {moviesError.message}</Text> :
+          <View>
+            <Text className="text-white text-2xl font-bold">Latest Movies.</Text>
+
+            <FlatList
+              data={movies}
+              renderItem={({ item }) => <Text>{item.title}</Text>}
+            />
+          </View>
+        }
+
       </ScrollView>
     </View>
   );
