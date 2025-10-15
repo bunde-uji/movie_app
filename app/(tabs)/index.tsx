@@ -26,20 +26,20 @@ export default function Index() {
       >
         <Image
           source={require("../../assets/images/icon.png")}
-          className="h-14 w-14 mb-2"
+          className="h-14 w-14 my-2"
         />
-        <View className="w-full">
+        {/* <View className="w-full mb-5">
           <SearchBar
             placeholder="Search for a movie"
             onPress={() => router.push("/search")}
             onChangeText={() => {}}
           />
-        </View>
+        </View> */}
 
         {moviesLoading ? <ActivityIndicator /> : 
           moviesError ? <Text>Error: {moviesError.message}</Text> :
           <View>
-            <Text className="text-white text-2xl font-bold">Latest Movies.</Text>
+            <Text className="text-white text-2xl mb-5 font-bold">Latest Movies</Text>
 
             <FlatList
               data={movies}
@@ -55,7 +55,8 @@ export default function Index() {
               keyExtractor={(item) => item.id.toString()}
               numColumns={3}
               columnWrapperStyle={{
-                gap: 5,
+                gap: 10,
+                // rowGap: 10,
                 justifyContent: "flex-start", 
               }}
               scrollEnabled={false}
