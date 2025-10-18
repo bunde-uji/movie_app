@@ -1,0 +1,1 @@
+// track the searches made by the user

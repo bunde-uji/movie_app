@@ -44,7 +44,8 @@ const Search = () => {
           scrollEnabled={true}
           ListHeaderComponentStyle={{
             marginBottom: 10,
-            position: "sticky"
+            position: "sticky",
+            gap: 10
           }}
           ListHeaderComponent={
             <>
@@ -77,12 +78,15 @@ const Search = () => {
                 </Text>
               ) : data && data.length > 0 ? (
                 <Text className="text-white text-lg mb-5 font-bold">
-                  Search Results for &quot;{search}&quot;: ({data.length})
+                  Search Results for &quot;{search}&quot;: {data.length}
                 </Text>
               ) : null
               }
             </>
           }
+          // ListEmptyComponent={
+
+          // }
         />
     </View>
   );
