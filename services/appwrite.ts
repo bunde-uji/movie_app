@@ -1,1 +1,1 @@
-// track the searches made by the user
+// track all the searches made by the user
