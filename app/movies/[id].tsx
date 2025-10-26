@@ -42,9 +42,9 @@ const MovieDetails = () => {
         <View className="flex-col items-start justify-center px-3">
           <Text className="text-white text-2xl font-bold mt-3">{movie && movie.original_title}</Text>
 
-          <View className="flex-row gap-2">
+          <View className="flex-row gap-2 items-center">
             <Text className="text-gray-300">{movie.release_date.split("-")[0]}</Text>
-            <Text className="text-gray-300">{movie.adult ? "18+" : "13+"}</Text>
+            <Text className="text-gray-300 px-1 py-[2px] bg-gray-700 text-sm rounded-sm">{movie.adult ? "18+" : "13+"}</Text>
             {/* <Text>{movie.}</Text> */}
           </View>
         </View>
