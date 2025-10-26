@@ -21,15 +21,16 @@ const MovieDetails = () => {
     fetchMovieDetails(id as string)
   );
 
+  console.log(movie)
+
   return (
     <SafeAreaView className="bg-primary flex-1 w-full">
       {movie && 
         <ScrollView className="flex-row w-full">
-        <View className="flex-row items-center gap-2 p-5">
+        <View className="flex-row items-center gap-2 p-3">
           <TouchableOpacity onPress={() => router.back()}>
-            <Ionicons name="arrow-back" size={20} color="white" />
+            <Ionicons name="arrow-back" size={25} color="white" />
           </TouchableOpacity>
-          <Text className="text-white text-lg font-medium">{movie && movie.original_title}</Text>
         </View>
         <View className="w-full">
           <Image
@@ -37,6 +38,15 @@ const MovieDetails = () => {
             className="h-96 w-screen"
             resizeMode="stretch"
           />
+        </View>
+        <View className="flex-col items-start justify-center px-3">
+          <Text className="text-white text-2xl font-bold mt-3">{movie && movie.original_title}</Text>
+
+          <View className="flex-row gap-2">
+            <Text className="text-gray-300">{movie.release_date.split("-")[0]}</Text>
+            <Text className="text-gray-300">{movie.adult ? "18+" : "13+"}</Text>
+            {/* <Text>{movie.}</Text> */}
+          </View>
         </View>
       </ScrollView>
       }

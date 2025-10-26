@@ -55,7 +55,6 @@ const Search = () => {
                 value={search}
                 onSubmitEditing={() => {
                   setSearch(search);
-                  console.log(search, "search");
                   refetch();
                 }}
               />

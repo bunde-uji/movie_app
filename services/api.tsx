@@ -17,17 +17,13 @@ export const fetchMovies = async ({ query }: { query: string }) => {
         headers: TMDB_CONFIG.headers,
     })
 
-    console.log(response, "response")
-
     if (!response.ok) {
         throw new Error("Failed to fetch movies")
     }
 
-    console.log(endpoint, "endpoint")
 
     const data = await response.json();
 
-    console.log(data, "data oooo")
 
     return data.results;
 }
@@ -42,8 +38,6 @@ export const fetchMovieDetails = async (movieId: string): Promise<Movie> => {
         if (!response.ok) throw new Error("Failed to fetch movie details") 
         
         const data = await response.json()
-
-        console.log("movie detail", data)
 
         return data
     } catch (error) {
