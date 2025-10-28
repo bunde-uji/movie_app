@@ -1,5 +1,3 @@
-import MovieDetails from "@/app/movies/[id]"
-
 export const TMDB_CONFIG = {
     BASE_URL: "https://api.themoviedb.org/3",
     API_KEY: process.env.EXPO_PUBLIC_API_KEY,
@@ -33,6 +31,7 @@ export const fetchMovieDetails = async (movieId: string): Promise<Movie> => {
         const response = await fetch(`${TMDB_CONFIG.BASE_URL}/movie/${movieId}?api_key=${TMDB_CONFIG.API_KEY }`, {
             method: "GET",
             headers: TMDB_CONFIG.headers,
+            // signal: 
         })
 
         if (!response.ok) throw new Error("Failed to fetch movie details") 
@@ -43,5 +42,26 @@ export const fetchMovieDetails = async (movieId: string): Promise<Movie> => {
     } catch (error) {
        console.log(error);
        throw error;   
+    }
+}
+
+export const fetchSimilarMovies = async (movieId: number): Promise<Movie[]> => {
+    const query = `${TMDB_CONFIG.BASE_URL}/movie/${movieId}/similar`
+    console.log(query)
+
+    try {
+        const response = await fetch(query, {
+            method: "GET",
+            headers: TMDB_CONFIG.headers
+        })
+
+        if (!response.ok) throw new Error("Failed to fetch similar movies")
+
+        const data = await response.json()
+
+        return data;
+    } catch (error) {
+        console.log("error")
+        throw(error)
     }
 }

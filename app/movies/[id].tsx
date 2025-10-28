@@ -10,7 +10,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import useFetch from "@/services/useFetch";
-import { fetchMovieDetails } from "@/services/api";
+import { fetchMovieDetails, fetchSimilarMovies } from "@/services/api";
+import { useEffect } from "react";
 
 const MovieDetails = () => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const MovieDetails = () => {
   const { data: movie, loading } = useFetch(() =>
     fetchMovieDetails(id as string)
   );
+
+  const { data: similarMovies, loading: similarMoviesLoading } = useFetch(() => fetchSimilarMovies(movie?.id as number))
 
   return (
     <SafeAreaView className="bg-primary flex-1 w-full">
