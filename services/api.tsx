@@ -59,7 +59,9 @@ export const fetchSimilarMovies = async (movieId: number): Promise<Movie[]> => {
 
         const data = await response.json()
 
-        return data;
+        console.log("data", data)
+
+        return data.results;
     } catch (error) {
         console.log("error")
         throw(error)

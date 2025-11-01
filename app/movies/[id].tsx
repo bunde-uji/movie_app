@@ -4,7 +4,9 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
+  FlatList,
+  ActivityIndicator
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -12,17 +14,20 @@ import { Ionicons } from "@expo/vector-icons";
 import useFetch from "@/services/useFetch";
 import { fetchMovieDetails, fetchSimilarMovies } from "@/services/api";
 import { useEffect } from "react";
+import MovieCard from "@/components/MovieCard";
 
 const MovieDetails = () => {
   const router = useRouter();
 
   const { id } = useLocalSearchParams();
 
+  console.log("id data type", typeof id)
+
   const { data: movie, loading } = useFetch(() =>
     fetchMovieDetails(id as string)
   );
 
-  const { data: similarMovies, loading: similarMoviesLoading } = useFetch(() => fetchSimilarMovies(movie?.id as number))
+  const { data: similarMovies, loading: similarMoviesLoading, error: similarMoviesError } = useFetch(() => fetchSimilarMovies(Number(id)))
 
   return (
     <SafeAreaView className="bg-primary flex-1 w-full">
@@ -56,7 +61,28 @@ const MovieDetails = () => {
           <View className="flex-col">
             <Text className="text-white pt-5 flex-wrap">{movie.overview}</Text>
           </View>
+
+          
         </View>
+
+        <View className="px-3">
+          {similarMoviesLoading ? <ActivityIndicator /> : similarMoviesError ? <Text>Error: {similarMoviesError.message}</Text> :
+          <>
+            <Text className="text-white text-xl font-bold mt-8 mb-2">You may also like</Text>
+            <FlatList
+            data={similarMovies?.slice(0, 10)}
+            renderItem={({ item }) => <MovieCard {...item} />}
+            keyExtractor={(item) => item.id.toString()}
+            numColumns={3}
+            columnWrapperStyle={{
+              gap: 10,
+              justifyContent: "flex-start",
+            }}
+            scrollEnabled={false}
+          />
+          </>
+          }
+          </View>
       </ScrollView>
       }
     </SafeAreaView>
