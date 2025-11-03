@@ -68,7 +68,7 @@ const MovieDetails = () => {
         <View className="px-3">
           {similarMoviesLoading ? <ActivityIndicator /> : similarMoviesError ? <Text>Error: {similarMoviesError.message}</Text> :
           <>
-            <Text className="text-white text-xl font-bold mt-8 mb-2">You may also like</Text>
+            <Text className="text-white text-xl font-bold mt-9 mb-2">You may also like</Text>
             <FlatList
             data={similarMovies?.slice(0, 10)}
             renderItem={({ item }) => <MovieCard {...item} />}
