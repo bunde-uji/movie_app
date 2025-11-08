@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <SafeAreaView className="bg-primary flex-1">
       <View className="p-3">
-        <Ionicons name="person" size={40} color="white" />
+        <Ionicons name="person" size={35} color="white" />
         <Text className="text-white">Profile</Text>
       </View>
     </SafeAreaView>
