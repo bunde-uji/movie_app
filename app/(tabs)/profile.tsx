@@ -7,7 +7,7 @@ import Search from "./search";
 const Profile = () => {
   return (
     <SafeAreaView className="bg-primary flex-1">
-      <View className="p-3">
+      <View className="p-5">
         <Ionicons name="person" size={35} color="white" />
         <Text className="text-white">Profile</Text>
       </View>
